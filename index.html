@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datatables Custom</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <!-- Importando Remix Icons -->
+    <style>
+        th {
+            position: relative;
+        }
+
+        .sort-icon {
+            position: absolute;
+            right: 10px;
+            /* Alinha o ícone à direita */
+            top: 50%;
+            transform: translateY(-50%);
+            /* Centraliza verticalmente o ícone */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2>Exemplo de Tabela 1</h2>
+        <div>
+            <label>
+                Show
+                <select id="entriesSelect1">
+                    <option value="*">*</option>
+                    <option value="5" selected>5</option>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                </select>
+                entries
+            </label>
+            <input id="searchInput1" type="text" placeholder="Search" class="form-control mb-2" style="width: 300px;">
+        </div>
+        <table id="datatable1" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Username</th>
+                    <th>E-mail</th>
+                    <th>IP address</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Goddart</td>
+                    <td>Redholls</td>
+                    <td>gredholls0</td>
+                    <td>gredholls0@amazon.co.uk</td>
+                    <td>25.172.160.218</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Rozalie</td>
+                    <td>Hutcheon</td>
+                    <td>rhutcheon1</td>
+                    <td>rhutcheon1@nps.gov</td>
+                    <td>222.91.215.27</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Kale</td>
+                    <td>Durrans</td>
+                    <td>kdurrans2</td>
+                    <td>kdurrans2@about.com</td>
+                    <td>37.197.105.169</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Enrika</td>
+                    <td>Silman</td>
+                    <td>esilman3</td>
+                    <td>esilman3@archive.org</td>
+                    <td>235.243.126.59</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Elmore</td>
+                    <td>Kibbel</td>
+                    <td>ekibbel4</td>
+                    <td>ekibbel4@umich.edu</td>
+                    <td>29.166.205.100</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Boy</td>
+                    <td>Dentith</td>
+                    <td>bdentith5</td>
+                    <td>bdentith5@ebay.com</td>
+                    <td>13.137.176.201</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Carin</td>
+                    <td>Pipkin</td>
+                    <td>cpipkin6</td>
+                    <td>cpipkin6@printfriendly.com</td>
+                    <td>222.245.37.89</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Gunilla</td>
+                    <td>Sabati</td>
+                    <td>gsabati7</td>
+                    <td>gsabati7@blog.com</td>
+                    <td>141.136.85.98</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>Vail</td>
+                    <td>Elven</td>
+                    <td>velven8</td>
+                    <td>velven8@theatlantic.com</td>
+                    <td>204.175.209.200</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>Brian</td>
+                    <td>Phlippsen</td>
+                    <td>bphlippsen9</td>
+                    <td>bphlippsen9@mysql.com</td>
+                    <td>186.4.7.176</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>Shaylah</td>
+                    <td>Compson</td>
+                    <td>scompsona</td>
+                    <td>scompsona@zdnet.com</td>
+                    <td>26.110.123.223</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>Danell</td>
+                    <td>Shenley</td>
+                    <td>dshenleyb</td>
+                    <td>dshenleyb@yellowpages.com</td>
+                    <td>152.115.95.66</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>Tabbitha</td>
+                    <td>Franzke</td>
+                    <td>tfranzkec</td>
+                    <td>tfranzkec@themeforest.net</td>
+                    <td>169.50.191.79</td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td>Rorke</td>
+                    <td>Caneo</td>
+                    <td>rcaneod</td>
+                    <td>rcaneod@buzzfeed.com</td>
+                    <td>138.162.165.121</td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td>Brina</td>
+                    <td>Dunsmore</td>
+                    <td>bdunsmoree</td>
+                    <td>bdunsmoree@live.com</td>
+                    <td>171.75.164.185</td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td>Ryan</td>
+                    <td>Gillbey</td>
+                    <td>rgillbeyf</td>
+                    <td>rgillbeyf@dell.com</td>
+                    <td>163.182.113.212</td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td>Kane</td>
+                    <td>Christensen</td>
+                    <td>kchristenseng</td>
+                    <td>kchristenseng@gmpg.org</td>
+                    <td>252.123.177.215</td>
+                </tr>
+                <tr>
+                    <td>18</td>
+                    <td>Willdon</td>
+                    <td>Krysiak</td>
+                    <td>wkrysiakh</td>
+                    <td>wkrysiakh@columbia.edu</td>
+                    <td>93.2.160.190</td>
+                </tr>
+                <tr>
+                    <td>19</td>
+                    <td>Karin</td>
+                    <td>Lehon</td>
+                    <td>klehoni</td>
+                    <td>klehoni@msn.com</td>
+                    <td>196.91.2.186</td>
+                </tr>
+                <tr>
+                    <td>20</td>
+                    <td>Natalie</td>
+                    <td>Lofting</td>
+                    <td>nloftingj</td>
+                    <td>nloftingj@craigslist.org</td>
+                    <td>244.181.200.200</td>
+                </tr>
+                <tr>
+                    <td>21</td>
+                    <td>Rivy</td>
+                    <td>Arrow</td>
+                    <td>rarrowk</td>
+                    <td>rarrowk@utexas.edu</td>
+                    <td>233.5.221.82</td>
+                </tr>
+                <tr>
+                    <td>22</td>
+                    <td>Berenice</td>
+                    <td>Yesenev</td>
+                    <td>byesenevl</td>
+                    <td>byesenevl@oaic.gov.au</td>
+                    <td>137.237.212.244</td>
+                </tr>
+                <tr>
+                    <td>23</td>
+                    <td>Yul</td>
+                    <td>Ambrosetti</td>
+                    <td>yambrosettim</td>
+                    <td>yambrosettim@drupal.org</td>
+                    <td>218.44.60.57</td>
+                </tr>
+                <tr>
+                    <td>24</td>
+                    <td>Alfy</td>
+                    <td>Vannacci</td>
+                    <td>avannaccin</td>
+                    <td>avannaccin@google.cn</td>
+                    <td>204.17.44.133</td>
+                </tr>
+                <tr>
+                    <td>25</td>
+                    <td>Janetta</td>
+                    <td>Jobson</td>
+                    <td>jjobsono</td>
+                    <td>jjobsono@businesswire.com</td>
+                    <td>34.108.247.89</td>
+                </tr>
+                <tr>
+                    <td>26</td>
+                    <td>Gary</td>
+                    <td>Plaister</td>
+                    <td>gplaisterp</td>
+                    <td>gplaisterp@ucoz.com</td>
+                    <td>196.64.110.190</td>
+                </tr>
+                <tr>
+                    <td>27</td>
+                    <td>Perren</td>
+                    <td>Beckey</td>
+                    <td>pbeckeyq</td>
+                    <td>pbeckeyq@eepurl.com</td>
+                    <td>76.14.213.32</td>
+                </tr>
+                <tr>
+                    <td>28</td>
+                    <td>Ruthi</td>
+                    <td>Fakes</td>
+                    <td>rfakesr</td>
+                    <td>rfakesr@unicef.org</td>
+                    <td>164.3.144.116</td>
+                </tr>
+                <tr>
+                    <td>29</td>
+                    <td>Carlin</td>
+                    <td>Liebermann</td>
+                    <td>cliebermanns</td>
+                    <td>cliebermanns@google.com.hk</td>
+                    <td>92.82.115.190</td>
+                </tr>
+                <tr>
+                    <td>30</td>
+                    <td>Hermie</td>
+                    <td>Yarham</td>
+                    <td>hyarhamt</td>
+                    <td>hyarhamt@nymag.com</td>
+                    <td>124.238.244.67</td>
+                </tr>
+                <tr>
+                    <td>31</td>
+                    <td>Kellen</td>
+                    <td>Savage</td>
+                    <td>ksavageu</td>
+                    <td>ksavageu@epa.gov</td>
+                    <td>63.146.165.174</td>
+                </tr>
+                <tr>
+                    <td>32</td>
+                    <td>Dimitry</td>
+                    <td>Crates</td>
+                    <td>dcratesv</td>
+                    <td>dcratesv@blogger.com</td>
+                    <td>190.111.13.82</td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="info1" class="mb-2">
+            Showing <span id="startEntry1"></span> to <span id="endEntry1"></span> of <span id="totalEntries1"></span>
+            entries
+        </div>
+        <nav aria-label="Page navigation">
+            <ul id="pagination1" class="pagination justify-content-end">
+                <!-- Paginação será preenchida dinamicamente -->
+            </ul>
+        </nav>
+    </div>
+
+    <div class="container mt-5">
+        <h2>Exemplo de Tabela 2</h2>
+        <div>
+            <label>
+                Show
+                <select id="entriesSelect2">
+                    <option value="*">All</option>
+                    <option value="5" selected>5</option>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                </select>
+                entries
+            </label>
+            <input id="searchInput2" type="text" placeholder="Search" class="form-control mb-2" style="width: 300px;">
+        </div>
+        <table id="datatable2" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Username</th>
+                    <th>E-mail</th>
+                    <th>IP address</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Goddart</td>
+                    <td>Redholls</td>
+                    <td>gredholls0</td>
+                    <td>gredholls0@amazon.co.uk</td>
+                    <td>25.172.160.218</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Rozalie</td>
+                    <td>Hutcheon</td>
+                    <td>rhutcheon1</td>
+                    <td>rhutcheon1@nps.gov</td>
+                    <td>222.91.215.27</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Kale</td>
+                    <td>Durrans</td>
+                    <td>kdurrans2</td>
+                    <td>kdurrans2@about.com</td>
+                    <td>37.197.105.169</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Enrika</td>
+                    <td>Silman</td>
+                    <td>esilman3</td>
+                    <td>esilman3@archive.org</td>
+                    <td>235.243.126.59</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Elmore</td>
+                    <td>Kibbel</td>
+                    <td>ekibbel4</td>
+                    <td>ekibbel4@umich.edu</td>
+                    <td>29.166.205.100</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Boy</td>
+                    <td>Dentith</td>
+                    <td>bdentith5</td>
+                    <td>bdentith5@ebay.com</td>
+                    <td>13.137.176.201</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Carin</td>
+                    <td>Pipkin</td>
+                    <td>cpipkin6</td>
+                    <td>cpipkin6@printfriendly.com</td>
+                    <td>222.245.37.89</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Gunilla</td>
+                    <td>Sabati</td>
+                    <td>gsabati7</td>
+                    <td>gsabati7@blog.com</td>
+                    <td>141.136.85.98</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>Vail</td>
+                    <td>Elven</td>
+                    <td>velven8</td>
+                    <td>velven8@theatlantic.com</td>
+                    <td>204.175.209.200</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>Brian</td>
+                    <td>Phlippsen</td>
+                    <td>bphlippsen9</td>
+                    <td>bphlippsen9@mysql.com</td>
+                    <td>186.4.7.176</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>Shaylah</td>
+                    <td>Compson</td>
+                    <td>scompsona</td>
+                    <td>scompsona@zdnet.com</td>
+                    <td>26.110.123.223</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>Danell</td>
+                    <td>Shenley</td>
+                    <td>dshenleyb</td>
+                    <td>dshenleyb@yellowpages.com</td>
+                    <td>152.115.95.66</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>Tabbitha</td>
+                    <td>Franzke</td>
+                    <td>tfranzkec</td>
+                    <td>tfranzkec@themeforest.net</td>
+                    <td>169.50.191.79</td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td>Rorke</td>
+                    <td>Caneo</td>
+                    <td>rcaneod</td>
+                    <td>rcaneod@buzzfeed.com</td>
+                    <td>138.162.165.121</td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td>Brina</td>
+                    <td>Dunsmore</td>
+                    <td>bdunsmoree</td>
+                    <td>bdunsmoree@live.com</td>
+                    <td>171.75.164.185</td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td>Ryan</td>
+                    <td>Gillbey</td>
+                    <td>rgillbeyf</td>
+                    <td>rgillbeyf@dell.com</td>
+                    <td>163.182.113.212</td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td>Kane</td>
+                    <td>Christensen</td>
+                    <td>kchristenseng</td>
+                    <td>kchristenseng@gmpg.org</td>
+                    <td>252.123.177.215</td>
+                </tr>
+                <tr>
+                    <td>18</td>
+                    <td>Willdon</td>
+                    <td>Krysiak</td>
+                    <td>wkrysiakh</td>
+                    <td>wkrysiakh@columbia.edu</td>
+                    <td>93.2.160.190</td>
+                </tr>
+                <tr>
+                    <td>19</td>
+                    <td>Karin</td>
+                    <td>Lehon</td>
+                    <td>klehoni</td>
+                    <td>klehoni@msn.com</td>
+                    <td>196.91.2.186</td>
+                </tr>
+                <tr>
+                    <td>20</td>
+                    <td>Natalie</td>
+                    <td>Lofting</td>
+                    <td>nloftingj</td>
+                    <td>nloftingj@craigslist.org</td>
+                    <td>244.181.200.200</td>
+                </tr>
+                <tr>
+                    <td>21</td>
+                    <td>Rivy</td>
+                    <td>Arrow</td>
+                    <td>rarrowk</td>
+                    <td>rarrowk@utexas.edu</td>
+                    <td>233.5.221.82</td>
+                </tr>
+                <tr>
+                    <td>22</td>
+                    <td>Berenice</td>
+                    <td>Yesenev</td>
+                    <td>byesenevl</td>
+                    <td>byesenevl@oaic.gov.au</td>
+                    <td>137.237.212.244</td>
+                </tr>
+                <tr>
+                    <td>23</td>
+                    <td>Yul</td>
+                    <td>Ambrosetti</td>
+                    <td>yambrosettim</td>
+                    <td>yambrosettim@drupal.org</td>
+                    <td>218.44.60.57</td>
+                </tr>
+                <tr>
+                    <td>24</td>
+                    <td>Alfy</td>
+                    <td>Vannacci</td>
+                    <td>avannaccin</td>
+                    <td>avannaccin@google.cn</td>
+                    <td>204.17.44.133</td>
+                </tr>
+                <tr>
+                    <td>25</td>
+                    <td>Janetta</td>
+                    <td>Jobson</td>
+                    <td>jjobsono</td>
+                    <td>jjobsono@businesswire.com</td>
+                    <td>34.108.247.89</td>
+                </tr>
+                <tr>
+                    <td>26</td>
+                    <td>Gary</td>
+                    <td>Plaister</td>
+                    <td>gplaisterp</td>
+                    <td>gplaisterp@ucoz.com</td>
+                    <td>196.64.110.190</td>
+                </tr>
+                <tr>
+                    <td>27</td>
+                    <td>Perren</td>
+                    <td>Beckey</td>
+                    <td>pbeckeyq</td>
+                    <td>pbeckeyq@eepurl.com</td>
+                    <td>76.14.213.32</td>
+                </tr>
+                <tr>
+                    <td>28</td>
+                    <td>Ruthi</td>
+                    <td>Fakes</td>
+                    <td>rfakesr</td>
+                    <td>rfakesr@unicef.org</td>
+                    <td>164.3.144.116</td>
+                </tr>
+                <tr>
+                    <td>29</td>
+                    <td>Carlin</td>
+                    <td>Liebermann</td>
+                    <td>cliebermanns</td>
+                    <td>cliebermanns@google.com.hk</td>
+                    <td>92.82.115.190</td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="info2" class="mb-2">
+            Showing <span id="startEntry2"></span> to <span id="endEntry2"></span> of <span id="totalEntries2"></span>
+            entries
+        </div>
+        <nav aria-label="Page navigation">
+            <ul id="pagination2" class="pagination justify-content-end">
+                <!-- Paginação será preenchida dinamicamente -->
+            </ul>
+        </nav>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="datatables.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
