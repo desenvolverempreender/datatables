@@ -1,5 +1,5 @@
 // Instanciar as datatables
-new DataTable({
+const dataTable = new DataTable({
     tableId: 'datatable1',
     entriesSelectId: 'entriesSelect1',
     searchInputId: 'searchInput1',
@@ -11,7 +11,8 @@ new DataTable({
     firstLabel: '<i class="ri-arrow-left-double-line"></i>',
     previousLabel: '<i class="ri-arrow-left-s-line"></i>',
     nextLabel: '<i class="ri-arrow-right-s-line"></i>',
-    lastLabel: '<i class="ri-arrow-right-double-fill"></i>'
+    lastLabel: '<i class="ri-arrow-right-double-fill"></i>',
+    hasCheckboxes: true // Ativar os checkboxes
 });
 
 new DataTable({
@@ -27,4 +28,28 @@ new DataTable({
     previousLabel: 'Previous',
     nextLabel: 'Next',
     lastLabel: 'Last'
+});
+
+// Exemplo de ação com os itens selecionados
+document.getElementById('performActionButton').addEventListener('click', () => {
+    dataTable.performActionOnSelected((selectedRows) => {
+        // Verificar se alguma linha foi selecionada
+        if (selectedRows.length === 0) {
+            alert('Nenhum item foi selecionado.');
+            return;
+        }
+
+        // Obter os IDs das linhas selecionadas
+        const selectedRowIds = selectedRows.map((row) => {
+            const idCell = row.querySelectorAll('td')[1]; // Pega a segunda célula (assumindo que a primeira seja o checkbox)
+            return idCell ? idCell.textContent.trim() : ''; // Retorna o valor da célula (ID) ou string vazia se não existir
+        }).filter(id => id !== ''); // Filtra possíveis valores vazios
+
+        // Exibir os IDs das linhas selecionadas em um alert
+        if (selectedRowIds.length > 0) {
+            alert('IDs selecionados: ' + selectedRowIds.join(', '));
+        } else {
+            alert('Nenhum ID foi selecionado.');
+        }
+    });
 });
