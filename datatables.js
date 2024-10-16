@@ -21,6 +21,12 @@ class DataTable {
         this.currentPage = 1; // Current active page
         this.filteredData = [...this.rows]; // Initialize filtered data with all rows
     
+        this.hasCheckboxes = config.hasCheckboxes || false; 
+
+        if (this.hasCheckboxes) {
+            this.addCheckboxesToRows();
+        }
+
         // Initialize functionalities
         this.addSearchFunctionality(); // Add search functionality
         this.addEntriesFunctionality(); // Add entries per page functionality
@@ -28,6 +34,53 @@ class DataTable {
         this.displayTable(this.filteredData, 1); // Display the table on the first page
     }    
 
+    addCheckboxesToRows() {
+        this.rows.forEach(row => {
+            const checkboxCell = document.createElement('td');
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.className = 'row-checkbox';
+            checkboxCell.appendChild(checkbox);
+            row.insertBefore(checkboxCell, row.firstChild);
+        });
+
+        const headerRow = this.table.querySelector('thead tr');
+        const checkboxHeaderCell = document.createElement('th');
+        const selectAllCheckbox = document.createElement('input');
+        selectAllCheckbox.type = 'checkbox';
+        selectAllCheckbox.className = 'select-all-checkbox';
+        checkboxHeaderCell.appendChild(selectAllCheckbox);
+        headerRow.insertBefore(checkboxHeaderCell, headerRow.firstChild);
+        
+        selectAllCheckbox.addEventListener('change', (event) => {
+            const isChecked = event.target.checked;
+            this.rows.forEach(row => {
+                const checkbox = row.querySelector('.row-checkbox');
+                checkbox.checked = isChecked;
+            });
+        });
+    }
+    
+    getSelectedItems() {
+        const selectedItems = [];
+        this.rows.forEach(row => {
+            const checkbox = row.querySelector('.row-checkbox');
+            if (checkbox && checkbox.checked) {
+                selectedItems.push(row);
+            }
+        });
+        return selectedItems;
+    }
+
+    performActionOnSelected(callback) {
+        const selectedRows = this.getSelectedItems();
+        if (selectedRows.length > 0) {
+            callback(selectedRows);
+        } else {
+            alert('Nenhuma linha selecionada.');
+        }
+    }
+    
     // Enable sorting functionality for table columns
     makeTableSortable() {
         const headers = this.table.querySelectorAll('th'); // Get all table headers
