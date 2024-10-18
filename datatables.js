@@ -39,7 +39,7 @@ class DataTable {
             const checkboxCell = document.createElement('td');
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
-            checkbox.className = 'row-checkbox';
+            checkbox.className = 'row-checkbox form-check-input';
             checkboxCell.appendChild(checkbox);
             row.insertBefore(checkboxCell, row.firstChild);
         });
@@ -48,7 +48,7 @@ class DataTable {
         const checkboxHeaderCell = document.createElement('th');
         const selectAllCheckbox = document.createElement('input');
         selectAllCheckbox.type = 'checkbox';
-        selectAllCheckbox.className = 'select-all-checkbox';
+        selectAllCheckbox.className = 'select-all-checkbox form-check-input';
         checkboxHeaderCell.appendChild(selectAllCheckbox);
         headerRow.insertBefore(checkboxHeaderCell, headerRow.firstChild);
         
